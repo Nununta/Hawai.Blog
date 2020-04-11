@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= @food.date %></h2>
+    <div>
+      店名：<%= @food.name %>
+    </div>
+    <div>
+      Food<%= @food.food %>
+    </div>
+    <hr>
+    <div>
+      <h3>Food Answer</h3>
+      <table class="table table-striped">
+        <% if @food.foodanswers.any? %>
+          <thead class ="thead-light">
+            <tr>
+              <td>Name</td>
+              <td>Opinion</td>
+              <td>Menu</td>
+            </tr>
+          </thead>
+          <tbody>
+          <% @food.foodanswers.each do |foodanswer| %>
+            <tr>
+              <td>
+                <%= foodanswer.name %>
+              </td>
+              <td>
+                <%= foodanswer.content %>
+              </td>
+              <td>
+                [<%= link_to "Edit", edit_food_foodanswer_path(@food, foodanswer) %>]
+                [<%= link_to "Delete", food_foodanswer_path(@food, foodanswer), method: :delete, data:{ confirm: "削除してもよろしいでしょうか?"}%>]
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        <% else %>
+          <p>No answer yet</p>
+        <% end %>
+      </table>
+    </div>
+
+    <h3>Post new answer</h3>
+    <%= form_with model: [@food, @foodanswer], local: true do |f| %>
+      <%= f.hidden_field :food_id, { value: @food.id} %>
+      <div class="form-group">
+        <label>Name</label>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <%= f.text_area :content, class: "form-control" %>
+      </div>
+      <div class="text-center">
+        <%= f.submit "Post", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+
+    <div>
+      <%= link_to "Food list", foods_path %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<h1>ハワイお土産リスト</h1>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>購入品</th>
+          <th>数量</th>
+          <th>値段(単価)</th>
+          <th>合計額</th>
+          <th>Menu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goods.each do |good| %>
+          <tr>
+            <td><%= good.id %></td>
+            <td><%= link_to good.name, good_path(good) %></td>
+            <td><%= good.quantity %></td>
+            <td><%= good.price %></td>
+            <td><% total_price = good.price.to_i * good.quantity %>
+              <%= total_price %>
+            </td>
+            <td>[<%=link_to "Edit", edit_good_path(good) %>]
+              [<%=link_to "Delete", good_path(good), method: :delete, data:{ confirm: "削除してもよろしいでしょうか" }  %>]
+            </td>
+          <tr>
+       <% end %>
+      </tbody>
+      </table>
+      <div>
+        <%= link_to "New Goods list", new_good_path %>
+      </div>
+  </div>
+</div>

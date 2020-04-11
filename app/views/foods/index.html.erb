@@ -1,0 +1,38 @@
+<h2>Food List</h2>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>日付</th>
+          <th>店名</th>
+          <th>Foodメニュー</th>
+          <th>値段</th>
+          <th>数量</th>
+          <th>場所</th>
+          <th>Menu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @foods.each do |food| %>
+          <tr>
+            <td><%= food.date %></td>
+            <td><%= food.name %></td>
+            <td><%= link_to food.food, food_path(food) %></td>
+            <td><%= food.price %></td>
+            <td><%= food.quantity %></td>
+            <td><%= food.place %></td>
+            <td>
+              [<%= link_to "Edit", edit_food_path(food) %>]
+              [<%= link_to "Delete", food_path(food), method: :delete, data:{ confirm: "削除してもよろしいですか❓"} %>]
+            </td>
+          </tr>
+
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+      <%= link_to "New Post", new_food_path %>
+    </div>
+  </div>
+</div>

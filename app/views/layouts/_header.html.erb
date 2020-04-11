@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3" id="mainNav">
+  <div class="container">
+    <% if user_signed_in? %>
+    <a class="navbar-brand js-scroll-trigger" href="/"><%= current_user.profile.name %></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <% else %>
+    <a class="navbar-brand js-scroll-trigger" href="/">Hawai Blog</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <% end %>
+      <ul class="navbar-nav ml-auto my-2 my-lg-0">
+        <% if user_signed_in? %>
+<!--        <li class="nav-item"><a class="nav-link js-scroll-trigger" href= "#">About Us</a></li>-->
+        <li class="nav-item nav-link js-scroll-trigger"><%= link_to 'About Us', "#", class: "text-white" %></li>
+<!--        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/uploads">Photo Gallery</a></li>-->
+        <li class="nav-item nav-link js-scroll-trigger"><%= link_to 'Photo Gallery', uploads_path, class: "text-white" %></li>
+        <li class="nav-item nav-link js-scroll-trigger"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "text-white" %></li>
+<!--        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/sign_out">Logout</a></li>-->
+        <% else %>
+<!--          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/sign_up">Sign Up</a></li>-->
+          <li class="nav-item nav-link js-scroll-trigger"><%= link_to '新規登録', new_user_registration_path, class: "text-white" %></li>
+<!--          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/sign_in">Login</a></li>-->
+          <li class="nav-item nav-link js-scroll-trigger"><%= link_to 'ログイン', new_user_session_path, class: "text-white" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="top-space"></div>
+  <% if flash[:notice] %>
+    <p class="text-success"><%= flash[:notice] %></p>
+  <% end %>
+  <% if flash[:alert] %>
+    <p class="text-danger"><%= flash[:alert] %></p>
+  <% end %>
+

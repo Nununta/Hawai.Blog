@@ -1,0 +1,29 @@
+<%= form_with model: @food, local: true do |f| %>
+  <div class="form-group">
+    <label>Date</label>
+    <%= f.text_field :date, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Shop Name</label>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Food</label>
+    <%= f.text_field :food, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Price</label>
+    <%= f.text_field :price, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>数量</label>
+    <%= f.text_field :quantity, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>place</label>
+    <%= f.text_field :place, class: "form-control" %>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

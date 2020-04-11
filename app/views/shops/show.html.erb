@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= @shop.date %></h2>
+    <div>
+      店名：<%= @shop.shopname %>
+    </div>
+    <div>
+      場所<%= @shop.place %>
+    </div>
+    <hr>
+    <div>
+      <h3>Shop Information</h3>
+      <table class="table table-striped">
+        <% if @shop.shopers.any? %>
+          <thead class="thead-light">
+          <tr>
+            <td>Name</td>
+            <td>Information</td>
+            <td>Menu</td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @shop.shopers.each do |shoper| %>
+            <tr>
+              <td>
+                <%= shoper.name %>
+              </td>
+              <td>
+                <%= shoper.content %>
+              </td>
+              <td>
+                [<%= link_to "Edit", edit_shop_shoper_path(@shop, shoper) %>]
+                [<%= link_to "Delete", shop_shoper_path(@shop, shoper),
+                             method: :delete, data:{ confirm: "削除してもよろしいでしょうか?"} %>]
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        <% else %>
+          <p>No answer yet.</p>
+        <% end %>
+      </table>
+    </div>
+    <h3>Post New Answer</h3>
+    <%= form_with model: [@shop, @shoper], local: true do |f| %>
+      <%= f.hidden_field :shop_id, { value: @shop.id} %>
+      <div class="form-group">
+        <label>Name</label>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <%= f.text_area :content, class: "form-control" %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "Post", class: "btn btn-primary" %>
+      </div>
+
+    <% end %>
+
+    <div>
+      <%= link_to "Shop List", shops_path %>
+    </div>
+  </div>
+</div>
